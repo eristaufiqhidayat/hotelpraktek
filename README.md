@@ -44,6 +44,22 @@ Buka `http://127.0.0.1:8000`.
 
 Atau jalankan sekaligus: `composer run setup`, lalu `php artisan serve`.
 
+### Shared hosting (cPanel) tanpa `proc_open`
+
+Banyak hosting mematikan `proc_open`, sehingga Composer tidak bisa menjalankan script sesudah instalasi. Jalankan:
+
+```bash
+composer install --no-dev --no-scripts --optimize-autoloader
+php artisan package:discover
+cp .env.example .env        # lalu set APP_ENV=production, APP_DEBUG=false, APP_URL
+php artisan key:generate
+touch database/database.sqlite
+php artisan migrate --seed --force
+php artisan config:cache && php artisan route:cache && php artisan view:cache
+```
+
+Arahkan **document root** domain/subdomain ke folder `public/` proyek (cPanel → Domains). Jika tidak bisa, file `.htaccess` di root proyek meneruskan semua permintaan ke `public/` dan memblokir akses ke `.env`, `vendor/`, `storage/`, dan file proyek lain. Pastikan folder `storage/` dan `bootstrap/cache/` bisa ditulis oleh web server, dan juga folder `database/` bila memakai SQLite.
+
 ### Memakai MySQL
 
 Ubah `.env`:

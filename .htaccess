@@ -1,0 +1,18 @@
+# Untuk hosting di mana folder proyek berada di dalam public_html dan
+# document root tidak bisa diarahkan ke folder public/.
+# Semua permintaan diteruskan ke public/, file sensitif tidak bisa diakses.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # tolak akses ke file tersembunyi (.env, .git, dll.) dan file proyek
+    RewriteRule (^|/)\. - [F,L]
+    RewriteRule ^(artisan|composer\.(json|lock)|phpunit\.xml|README\.md)$ - [F,L]
+    RewriteRule ^(app|bootstrap|config|database|resources|routes|storage|tests|vendor)(/|$) - [F,L]
+
+    RewriteCond %{REQUEST_URI} !(^|/)public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+    Require all denied
+</IfModule>
