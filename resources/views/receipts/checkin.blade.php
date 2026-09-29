@@ -1,0 +1,2 @@
+<div class="note ok">{{ ic('check') }}<span><b>{{ $r->guest }}</b> menempati kamar <b>{{ $no }}</b>{{ $up }}. Serahkan {{ $keys }} kartu kunci dan sampaikan jam sarapan 06.30–10.00 di Widuri Resto.</span></div>
+<div class="kv"><div><span>Kamar</span><b>{{ $no }}</b></div><div><span>Pergi</span><b>{{ fshort($r->departure) }}</b></div><div><span>Deposit</span><b>{{ rp($deposit) }}</b></div><div><span>Petugas</span><b>{{ app(\App\Services\Hotel::class)->who() }}</b></div></div>

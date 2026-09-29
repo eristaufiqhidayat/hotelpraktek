@@ -1,0 +1,1 @@
+<div class="step {{ $cls }}"><div class="no">@if($cls === 'done'){{ ic('check') }}@else{{ $n }}@endif</div><div><b style="font-size:15px">{{ $title }}</b><div style="color:var(--ink-2);margin-top:4px">{{ $slot }}</div></div></div>

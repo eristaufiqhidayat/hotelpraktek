@@ -1,0 +1,1 @@
+<div class="modal-h"><div><h2 id="mtitle" class="serif">{{ $title }}</h2>@if(!empty($sub))<p>{{ $sub }}</p>@endif</div><a class="x btn" href="{{ close_url() }}" aria-label="Tutup" style="min-height:36px;padding:0;display:flex">×</a></div>
